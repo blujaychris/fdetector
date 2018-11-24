@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:fragment="simplePost(postData)">
+            <div class="card mb-4">
+                <img class="card-img-top" th:src="@{${'/photos/' + postData.getId()}}" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${postData.getTitle()}"></h2>
+                    <p class="card-text" th:text="${postData.getNewsFakeProvement()}"></p>
+                    <a th:href="'/post/' + ${postData.getId()}" class="btn btn-primary">Czytaj więcej &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Dodany o <strong th:text="${postData.getCreateDate()}"></strong> przez
+                    <span th:text="${postData.getAuthor()}"></span>
+                </div>
+            </div>
+    </div>
+</html>

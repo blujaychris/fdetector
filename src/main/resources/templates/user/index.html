@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text="#{web.title}"></title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/blog-home.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Navigation -->
+    <th:block th:replace="user/inc/nav :: nav"></th:block>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+          <h1 class="my-4"><strong th:text="#{web.mainpage.header}"></strong>
+            <small th:text="#{web.mainpage.header.subtext}"></small>
+          </h1>
+
+
+          <!-- Blog Post -->
+          <th:block th:each="data : ${news.getContent()}">
+             <div th:include="user/inc/simplePost :: simplePost(postData=${data})"></div>
+          </th:block>
+
+          <!-- Pagination -->
+          <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+              <a th:if=${news.hasPrevious()} class="page-link" th:href="'/page/' + ${(news.getNumber() - 1)}">&larr; Poprzednia</a>
+            </li>
+            <li class="page-item">
+              <a th:if=${news.hasNext()} class="page-link" th:href="'/page/' + ${(news.getNumber() + 1)}">Następna &rarr;</a>
+            </li>
+          </ul>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <th:block th:replace="user/inc/rightNav :: rightNav"></th:block>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <th:block th:replace="user/inc/footer :: footer"></th:block>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
